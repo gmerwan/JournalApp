@@ -15,7 +15,7 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
 import journalapp.udacity.alc.journalapp.R;
-import journalapp.udacity.alc.journalapp.utils.Preferences;
+import journalapp.udacity.alc.journalapp.utilities.Preferences;
 
 public class LoginActivity extends AppCompatActivity {
 

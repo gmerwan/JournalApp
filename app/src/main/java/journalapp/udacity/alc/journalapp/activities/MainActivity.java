@@ -14,7 +14,7 @@ import android.view.View;
 
 import journalapp.udacity.alc.journalapp.R;
 import journalapp.udacity.alc.journalapp.adapters.DiaryAdapter;
-import journalapp.udacity.alc.journalapp.utils.Preferences;
+import journalapp.udacity.alc.journalapp.utilities.Preferences;
 import journalapp.udacity.alc.journalapp.viewmodel.DiaryModel;
 
 public class MainActivity extends AppCompatActivity {

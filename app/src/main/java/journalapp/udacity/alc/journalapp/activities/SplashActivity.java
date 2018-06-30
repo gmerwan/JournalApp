@@ -6,7 +6,7 @@ package journalapp.udacity.alc.journalapp.activities;
         import android.os.Bundle;
 
         import journalapp.udacity.alc.journalapp.R;
-        import journalapp.udacity.alc.journalapp.utils.Preferences;
+        import journalapp.udacity.alc.journalapp.utilities.Preferences;
 
 public class SplashActivity extends AppCompatActivity {
 

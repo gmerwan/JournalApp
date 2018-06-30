@@ -1,4 +1,4 @@
-package journalapp.udacity.alc.journalapp.utils;
+package journalapp.udacity.alc.journalapp.utilities;
 
 import android.content.Context;
 import android.content.SharedPreferences;

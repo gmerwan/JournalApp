@@ -9,7 +9,7 @@ import journalapp.udacity.alc.journalapp.activities.MainActivity;
 import journalapp.udacity.alc.journalapp.adapters.DiaryAdapter;
 import journalapp.udacity.alc.journalapp.room.database.Service;
 import journalapp.udacity.alc.journalapp.room.entity.Diary;
-import journalapp.udacity.alc.journalapp.utils.Preferences;
+import journalapp.udacity.alc.journalapp.utilities.Preferences;
 
 public class DiaryModel extends ViewModel {
 

@@ -14,7 +14,7 @@ import java.util.List;
 
 import journalapp.udacity.alc.journalapp.R;
 import journalapp.udacity.alc.journalapp.room.entity.Diary;
-import journalapp.udacity.alc.journalapp.utils.DateUtils;
+import journalapp.udacity.alc.journalapp.utilities.DateUtils;
 
 public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.ViewHolder> {
     private Context context;
