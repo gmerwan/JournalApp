@@ -15,18 +15,19 @@
         completions."
     </string>
     <string name="sign_up_with_google">Sign up with Google to continue.</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">Journal App</string>
     <string name="action_about">About</string>
     <string name="action_sign_out">Sign Out</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_about">About Journal App</string>
+    <string name="title_activity_add">Add new journal</string>
 
     <string name="today">Today</string>
     <string name="yesterday">Yesterday</string>
 
-    <string name="about_text">ALC #7DaysOfCodeChallenge is an individual project/program completion task for the ALC learners.\n
-        The goal is to\n
-        • Determine your overall progress in the ALC program, and identify the top 100 learners from this track.\n
+    <string name="about_text">ALC #7DaysOfCodeChallenge is an individual project/program completion task for the ALC learners.\n\n
+        The goal is to\n\n
+        • Determine your overall progress in the ALC program, and identify the top 100 learners from this track.\n\n
         • To test the skills learned by learners and certify the top learners at the end of the program.\n
     </string>
 

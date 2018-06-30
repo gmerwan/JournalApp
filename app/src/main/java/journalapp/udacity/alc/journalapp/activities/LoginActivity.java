@@ -4,13 +4,14 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInApi;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
@@ -26,13 +27,14 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Button SignInButton = findViewById(R.id.sign_in_button);
+        SignInButton SignInButton = findViewById(R.id.sign_in_button);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(LoginActivity.this, gso);
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(LoginActivity.this);
+
         updateUI(account);
 
         SignInButton.setOnClickListener(new View.OnClickListener() {
@@ -81,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(this, MainActivity.class));
             finish();
         } else {
-            Toast.makeText(this, "There has been an error", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Click on Sign in Button to Enter", Toast.LENGTH_LONG).show();
         }
 
     }

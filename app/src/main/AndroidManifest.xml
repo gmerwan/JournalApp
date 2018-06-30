@@ -38,7 +38,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="journalapp.udacity.alc.journalapp.activities.MainActivity" />
         </activity>
-        <activity android:name=".activities.AddDiaryActivity"></activity>
+        <activity android:name=".activities.AddDiaryActivity"
+            android:label="@string/title_activity_add"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="journalapp.udacity.alc.journalapp.activities.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
