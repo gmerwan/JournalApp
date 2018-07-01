@@ -18,21 +18,6 @@ public class DiaryModel extends ViewModel {
 
     public void loadData(Activity activity) {
         diaries = App.getDB().diaryDao().getAll(Preferences.getToken());
-//
-//        if (diaries.size() != 0) {
-//            ((MainActivity) activity).recyclerView.setAdapter(new DiaryAdapter(activity, diaries));
-//        }
-    }
-
-//    public void loadDetail(Activity activity, Diary diary) {
-//        this.diary = Service.RoomService.getAppDatabase(activity).diaryDao()
-//                .findById(Preferences.getToken(), diary.getId());
-//        if (this.diary.getDate() != 0) {
-//            displayDetail(activity, this.diary);
-//        }
-//    }
-
-    public void displayDetail(Activity activity, Diary diary) {
 
     }
 }

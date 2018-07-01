@@ -2,10 +2,12 @@ package journalapp.udacity.alc.journalapp.activities;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -29,6 +31,7 @@ public class AddDiaryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("onCreate", "onCreate");
         setContentView(R.layout.activity_add_diary);
 
         title = findViewById(R.id.title);
@@ -46,19 +49,22 @@ public class AddDiaryActivity extends AppCompatActivity {
         }
     }
 
-    public static void updateDiary(final Context context, final String title, final String content) {
+    public static void  updateDiary(final Context context,final int id, final String title, final String content) {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(final Void... params) {
 
-                App.getDB().diaryDao().update(new Diary(Preferences.getToken(), title, content,
+                App.getDB().diaryDao().update(new Diary(id, Preferences.getToken(), title, content,
                         System.currentTimeMillis()));
+                Log.d("diary updated", "hello");
                 return null;
             }
 
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
+                Toast.makeText(context, "Diary updated", Toast.LENGTH_SHORT).show();
+                context.startActivity(new Intent(context, MainActivity.class));
                 ((Activity) context).finish();
             }
         }.execute();
@@ -72,12 +78,15 @@ public class AddDiaryActivity extends AppCompatActivity {
                 Diary diary = new Diary(Preferences.getToken(), title, content,
                         System.currentTimeMillis());
                 App.getDB().diaryDao().insert(diary);
+                Log.d("diary saved", "hello");
                 return null;
             }
 
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
+                Toast.makeText(context, "Diary saved", Toast.LENGTH_SHORT).show();
+                context.startActivity(new Intent(context, MainActivity.class));
                 ((Activity) context).finish();
             }
         }.execute();
@@ -87,14 +96,19 @@ public class AddDiaryActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
 
-        if (getIntent().hasExtra("id")) {
-            updateDiary(this, title.getText().toString(), content.getText().toString());
-
-        } else if (!TextUtils.isEmpty(title.getText().toString())
-                || !TextUtils.isEmpty(content.getText().toString())) {
-            saveDiary(this, title.getText().toString(), content.getText().toString());
-        }
-
+        startActivity(new Intent(AddDiaryActivity.this, MainActivity.class));
+        finish();
+        Toast.makeText(getApplicationContext(), "Diary not saved", Toast.LENGTH_SHORT).show();
+//
+//        if (getIntent().hasExtra("id")) {
+//            //update note
+//            Log.d("in update section", "hello");
+//            updateDiary(this, this.id, title.getText().toString(), content.getText().toString());
+//        } else if (!TextUtils.isEmpty(content.getText().toString())
+//                || !TextUtils.isEmpty(title.getText().toString())) {
+//            Log.d("in save section", "hello");
+//            saveDiary(this, title.getText().toString(), content.getText().toString());
+//        }
     }
 
     @Override
@@ -104,27 +118,28 @@ public class AddDiaryActivity extends AppCompatActivity {
         return true;
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_save) {
+        if (id == android.R.id.home) {
+            onBackPressed();
+
+        } else if (id == R.id.action_save) {
             if (TextUtils.isEmpty(content.getText().toString())
-                    || TextUtils.isEmpty(title.getText().toString())) {
+                    && TextUtils.isEmpty(title.getText().toString())) {
                 Toast.makeText(getApplicationContext(), "The title and/or body is empty", Toast.LENGTH_SHORT).show();
             } else {
                 if (getIntent().hasExtra("id")) {
                     //update note
-                    updateDiary(this, title.getText().toString(), content.getText().toString());
-                    return true;
-
-
+                    Log.d("in update section", "hello");
+                    updateDiary(this, this.id, title.getText().toString(), content.getText().toString());
+                } else {
+                    Log.d("in save section", "hello");
+                    saveDiary(this, title.getText().toString(), content.getText().toString());
                 }
-                saveDiary(this, title.getText().toString(), content.getText().toString());
+                return true;
             }
-
-            return true;
         }
         return super.onOptionsItemSelected(item);
     }

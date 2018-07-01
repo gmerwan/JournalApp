@@ -2,6 +2,7 @@ package journalapp.udacity.alc.journalapp.room.entity;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 @Entity(tableName = "diary")
@@ -24,6 +25,15 @@ public class Diary {
 
     @ColumnInfo(name = "date")
     private long date;
+
+    @Ignore
+    public Diary(int id, String user, String title, String content, long date) {
+        this.id = id;
+        this.user = user;
+        this.title = title;
+        this.content = content;
+        this.date = date;
+    }
 
     public Diary(String user, String title, String content, long date) {
         this.user = user;

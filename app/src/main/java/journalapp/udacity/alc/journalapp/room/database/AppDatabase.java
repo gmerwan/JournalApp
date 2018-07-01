@@ -9,8 +9,6 @@ import journalapp.udacity.alc.journalapp.room.entity.Diary;
 @Database(entities = {Diary.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
-//    private static AppDatabase INSTANCE;
-
     public abstract DiaryDao diaryDao();
 
 }

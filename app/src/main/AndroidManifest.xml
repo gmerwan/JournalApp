@@ -43,9 +43,9 @@
             android:label="@string/title_activity_add"
             android:parentActivityName=".activities.MainActivity"
             android:theme="@style/AppTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="journalapp.udacity.alc.journalapp.activities.MainActivity" />
+            <!--<meta-data-->
+                <!--android:name="android.support.PARENT_ACTIVITY"-->
+                <!--android:value="journalapp.udacity.alc.journalapp.activities.MainActivity" />-->
         </activity>
     </application>
 
