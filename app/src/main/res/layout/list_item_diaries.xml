@@ -9,16 +9,19 @@
     android:layout_margin="4dp"
     app:cardCornerRadius="8dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@+id/edit_button"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/title"
@@ -30,31 +33,42 @@
                 tools:text="Title" />
 
             <!--<TextView-->
-                <!--android:id="@+id/feeling"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:paddingLeft="8dp"-->
-                <!--android:textSize="@dimen/medium_text_size"-->
-                <!--android:textStyle="bold"-->
-                <!--tools:text="Feeling" />-->
+            <!--android:id="@+id/feeling"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:paddingLeft="8dp"-->
+            <!--android:textSize="@dimen/medium_text_size"-->
+            <!--android:textStyle="bold"-->
+            <!--tools:text="Feeling" />-->
 
+            <TextView
+                android:id="@+id/content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:paddingTop="8dp"
+                tools:text="@string/about_text" />
+
+            <TextView
+                android:id="@+id/edited_on"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                tools:text="Updated: 1min ago" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/content"
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/edit_button"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:paddingTop="8dp"
-            tools:text="@string/about_text" />
+            android:clickable="true"
+            android:layout_margin="2dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            app:srcCompat="@drawable/ic_edit"/>
 
-        <TextView
-            android:id="@+id/updated_on"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="8dp"
-            tools:text="Updated: 1min ago" />
-    </LinearLayout>
+    </RelativeLayout>
 
 </android.support.v7.widget.CardView>

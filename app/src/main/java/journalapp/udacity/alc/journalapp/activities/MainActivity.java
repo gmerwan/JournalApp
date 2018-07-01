@@ -8,11 +8,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 
+import com.avast.android.dialogs.fragment.SimpleDialogFragment;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -21,6 +24,7 @@ import com.google.android.gms.tasks.Task;
 
 import journalapp.udacity.alc.journalapp.R;
 import journalapp.udacity.alc.journalapp.adapters.DiaryAdapter;
+import journalapp.udacity.alc.journalapp.room.entity.Diary;
 import journalapp.udacity.alc.journalapp.utilities.Preferences;
 import journalapp.udacity.alc.journalapp.viewmodel.DiaryModel;
 
@@ -28,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
 
     private GoogleSignInClient mGoogleSignInClient;
     public RecyclerView recyclerView;
+    public DiaryAdapter diaryAdapter;
+
+    private int recyclerViewItemPosition;
+    private View childView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,15 +59,50 @@ public class MainActivity extends AppCompatActivity {
             diaryModel.loadData(this);
         } else {
             // After the rotation of the screen, use cities of the ViewModel instance
-            recyclerView.setAdapter(new DiaryAdapter(this, diaryModel.diaries));
+            diaryAdapter = new DiaryAdapter(this, diaryModel.diaries);
+            recyclerView.setAdapter(diaryAdapter);
         }
+
+        recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            GestureDetector gestureDetector = new GestureDetector(MainActivity.this,
+                    new GestureDetector.SimpleOnGestureListener() {
+
+                @Override
+                public boolean onSingleTapUp(MotionEvent motionEvent) {
+                    return true;
+                }
+            });
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
+
+                childView = recyclerView.findChildViewUnder(motionEvent.getX(), motionEvent.getY());
+                if (childView != null && gestureDetector.onTouchEvent(motionEvent)) {
+                    recyclerViewItemPosition = recyclerView.getChildAdapterPosition(childView);
+                    Diary diary = diaryAdapter.getItem(recyclerViewItemPosition);
+                    showDiaryDialog(diary);
+                }
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
+        });
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
+        if (diaryAdapter != null) {
+            diaryAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -99,4 +142,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    private void showDiaryDialog(Diary diary) {
+        SimpleDialogFragment.createBuilder(this, getSupportFragmentManager())
+                .setTitle(diary.getTitle())
+                .setMessage(diary.getContent())
+                .setNegativeButtonText("Close")
+                .show();
+    }
+
 }
